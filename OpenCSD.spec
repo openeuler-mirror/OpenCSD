@@ -1,0 +1,47 @@
+Summary        : An open source CoreSight(tm) Trace Decode library
+Name           : OpenCSD
+Version        : 1.3.3
+Release        : 1
+License        : BSD
+Source         : %{name}-%{version}.tar.gz
+BuildRoot      : %{_tmppath}/%{name}-%{version}-${release}-root
+BuildRequires  : gcc-c++ make
+
+
+%description
+%{name} will decode formatted trace in three stages:
+1. Frame Deformatting : Removal CoreSight frame formatting from individual trace streams.
+2. Packet Processing : Separate individual trace streams into discrete packets.
+3. Packet Decode : Convert the packets into fully decoded trace describing the program flow on a core.
+The library is implemented in C++ with an optional "C" API.
+
+%global debug_package %{nil}
+
+%prep
+%setup -q
+
+
+%build
+make -C decoder/build/linux -j
+
+
+%install
+rm -rf %{buildroot}
+make -C decoder/build/linux install PREFIX=%{buildroot}/usr LIB_PATH=lib64
+
+
+%clean
+rm -rf %{buildroot}
+
+
+%files
+%defattr(-,root,root,0644)
+%doc README.md LICENSE
+%{_prefix}
+%exclude %{_bindir}
+%exclude %{_libdir}/*.a*
+
+
+%changelog
+* Tue Jan 03 2023 Junhao He <hejunhao3@hauwei.com> - 1.3.3-1
+- Package init

@@ -1,0 +1,4 @@
+version_control: git
+src_repo: https://github.com/Linaro/OpenCSD.git
+tag_prefix: "OpenCSD-"
+separator: "."
