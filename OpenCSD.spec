@@ -1,7 +1,7 @@
 Summary        : An open source CoreSight(tm) Trace Decode library
 Name           : OpenCSD
 Version        : 1.3.3
-Release        : 1
+Release        : 2
 License        : BSD
 Source         : %{name}-%{version}.tar.gz
 BuildRoot      : %{_tmppath}/%{name}-%{version}-${release}-root
@@ -37,11 +37,15 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,0644)
 %doc README.md LICENSE
-%{_prefix}
+%{_includedir}/opencsd
+%{_libdir}/libopencsd*
 %exclude %{_bindir}
 %exclude %{_libdir}/*.a*
 
 
 %changelog
+* Tue Feb 28 2023 liweiganga <liweiganga@uniontech.com> - 1.3.3-2
+- fix #I6I3EM and #I6I31E
+
 * Tue Jan 03 2023 Junhao He <hejunhao3@hauwei.com> - 1.3.3-1
 - Package init
