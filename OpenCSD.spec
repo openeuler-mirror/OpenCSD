@@ -1,7 +1,7 @@
 Summary        : An open source CoreSight(tm) Trace Decode library
 Name           : OpenCSD
 Version        : 1.3.3
-Release        : 3
+Release        : 4
 License        : BSD
 Source         : %{name}-%{version}.tar.gz
 BuildRoot      : %{_tmppath}/%{name}-%{version}-${release}-root
@@ -22,7 +22,7 @@ The library is implemented in C++ with an optional "C" API.
 
 
 %build
-make -C decoder/build/linux CPPFLAGS="-fPIE" LDFLAGS="-s -pie -Wl,-z,defs" -j
+make CC=$CC CXX=$CXX -C decoder/build/linux CPPFLAGS="-fPIE" LDFLAGS="-s -pie -Wl,-z,defs" -j
 
 
 %install
@@ -44,6 +44,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Apr 27 2023 Xiaoya Huang <huangxiaoya@iscas.ac.cn> - 1.3.3-4
+- Fix CC compiler support
+
 * Thu Mar 16 2023 huangfangrun <huangfangrun1@h-partners.com> - 1.3.3-3
 - [Compile Option] Add -fPIE -s and -pie options
 
